@@ -1,6 +1,6 @@
 #include <ILI9341_t3.h>
 #include <font_Arial.h> // from ILI9341_t3
-#include <XPT2046_Touchscreen.h>
+#include <XPT2046_Calibrated.h>
 #include <SPI.h>
 
 #define CS_PIN  8
@@ -8,11 +8,11 @@
 #define TFT_CS 10
 // MOSI=11, MISO=12, SCK=13
 
-XPT2046_Touchscreen ts(CS_PIN);
+XPT2046_Calibrated ts(CS_PIN);
 #define TIRQ_PIN  2
-//XPT2046_Touchscreen ts(CS_PIN);  // Param 2 - NULL - No interrupts
-//XPT2046_Touchscreen ts(CS_PIN, 255);  // Param 2 - 255 - No interrupts
-//XPT2046_Touchscreen ts(CS_PIN, TIRQ_PIN);  // Param 2 - Touch IRQ Pin - interrupt enabled polling
+//XPT2046_Calibrated ts(CS_PIN);  // Param 2 - NULL - No interrupts
+//XPT2046_Calibrated ts(CS_PIN, 255);  // Param 2 - 255 - No interrupts
+//XPT2046_Calibrated ts(CS_PIN, TIRQ_PIN);  // Param 2 - Touch IRQ Pin - interrupt enabled polling
 
 ILI9341_t3 tft = ILI9341_t3(TFT_CS, TFT_DC);
 

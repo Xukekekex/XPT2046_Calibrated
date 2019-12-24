@@ -1,4 +1,4 @@
-#include <XPT2046_Touchscreen.h>
+#include <XPT2046_Calibrated.h>
 #include <SPI.h>
 
 #define CS_PIN  8
@@ -6,7 +6,7 @@
 
 // The TIRQ interrupt signal must be used for this example.
 #define TIRQ_PIN  2
-XPT2046_Touchscreen ts(CS_PIN, TIRQ_PIN);  // Param 2 - Touch IRQ Pin - interrupt enabled polling
+XPT2046_Calibrated ts(CS_PIN, TIRQ_PIN);  // Param 2 - Touch IRQ Pin - interrupt enabled polling
 
 void setup() {
   Serial.begin(38400);
