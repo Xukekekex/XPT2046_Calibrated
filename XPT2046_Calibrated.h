@@ -52,7 +52,11 @@ public:
 		screenWidth(sW), screenHeight(sH),
 		deltaX(dX), deltaY(dY), 
 		alphaX(aX), betaX(bX), alphaY(aY), betaY(bY) {}
-	TS_Calibration(TS_Point aS, TS_Point aT, TS_Point bS, TS_Point bT, TS_Point cS, TS_Point cT, uint16_t sW, uint16_t sH);
+	TS_Calibration(
+		const TS_Point aS, const TS_Point aT, 
+		const TS_Point bS, const TS_Point bT, 
+		const TS_Point cS, const TS_Point cT, 
+		const uint16_t sW, const uint16_t sH);
 	bool defined;
 	uint16_t screenWidth, screenHeight;
 	int32_t deltaX, deltaY;
