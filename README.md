@@ -6,7 +6,7 @@ The only addition to this library is support for 3-point calibration as describe
 
 http://www.ti.com/lit/an/slyt277/slyt277.pdf
 
-See [examples/TouchCalibration/TouchCalibration.ino] for usage example.
+See [examples/TouchCalibration/TouchCalibration.ino](https://github.com/ardnew/XPT2046_Calibrated/blob/master/examples/TouchCalibration/TouchCalibration.ino) for usage example.
 
 The header from that example sketch follows.
 
