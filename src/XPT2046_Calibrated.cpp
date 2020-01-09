@@ -104,7 +104,7 @@ void XPT2046_Calibrated::update()
 	if (!isrWake) return;
 	uint32_t now = millis();
 	if (now - msraw < MSEC_THRESHOLD) return;
-	
+
 	SPI.beginTransaction(SPI_SETTING);
 	digitalWrite(csPin, LOW);
 	SPI.transfer(0xB1 /* Z1 */);
@@ -135,14 +135,14 @@ void XPT2046_Calibrated::update()
 		return;
 	}
 	zraw = z;
-	
+
 	// Average pair with least distance between each measured x then y
 	//Serial.printf("    z1=%d,z2=%d  ", z1, z2);
 	//Serial.printf("p=%d,  %d,%d  %d,%d  %d,%d", zraw,
 		//data[0], data[1], data[2], data[3], data[4], data[5]);
 	int16_t x = besttwoavg( data[0], data[2], data[4] );
 	int16_t y = besttwoavg( data[1], data[3], data[5] );
-	
+
 	//Serial.printf("    %d,%d", x, y);
 	//Serial.println();
 	if (z >= Z_THRESHOLD) {
@@ -201,6 +201,7 @@ void XPT2046_Calibrated::update()
 		}
 	}
 }
+
 TS_Calibration::TS_Calibration(
 	const TS_Point aS, const TS_Point aT,
 	const TS_Point bS, const TS_Point bT,
@@ -211,58 +212,58 @@ TS_Calibration::TS_Calibration(
 	screenWidth  = sW;
 	screenHeight = sH;
 
-	int32_t delta = 
-	    ( (aT.x - cT.x) * (bT.y - cT.y) ) 
+	int32_t delta =
+	    ( (aT.x - cT.x) * (bT.y - cT.y) )
 	    -
-	    ( (bT.x - cT.x) * (aT.y - cT.y) ); 
-	
-	alphaX = 
+	    ( (bT.x - cT.x) * (aT.y - cT.y) );
+
+	alphaX =
 	    (float)
 	      ( ( (aS.x - cS.x) * (bT.y - cT.y) )
 	        -
-	        ( (bS.x - cS.x) * (aT.y - cT.y) ) ) 
-	    / delta; 
-	
-	betaX = 
+	        ( (bS.x - cS.x) * (aT.y - cT.y) ) )
+	    / delta;
+
+	betaX =
 	    (float)
 	      ( ( (aT.x - cT.x) * (bS.x - cS.x) )
 	        -
-	        ( (bT.x - cT.x) * (aS.x - cS.x) ) ) 
+	        ( (bT.x - cT.x) * (aS.x - cS.x) ) )
 	    / delta;
-	
-	deltaX = 
-	    ( ( (uint64_t)aS.x 
+
+	deltaX =
+	    ( ( (uint64_t)aS.x
 	          * ( (bT.x * cT.y) - (cT.x * bT.y) ) )
 	      -
-	      ( (uint64_t)bS.x 
+	      ( (uint64_t)bS.x
 	          * ( (aT.x * cT.y) - (cT.x * aT.y) ) )
-	      + 
-	      ( (uint64_t)cS.x 
-	          * ( (aT.x * bT.y) - (bT.x * aT.y) ) ) ) 
+	      +
+	      ( (uint64_t)cS.x
+	          * ( (aT.x * bT.y) - (bT.x * aT.y) ) ) )
 	    / delta;
-	
-	alphaY = 
+
+	alphaY =
 	    (float)
 	      ( ( (aS.y - cS.y) * (bT.y - cT.y) )
 	        -
-	        ( (bS.y - cS.y) * (aT.y - cT.y) ) ) 
-	    / delta; 
-	
-	betaY = 
+	        ( (bS.y - cS.y) * (aT.y - cT.y) ) )
+	    / delta;
+
+	betaY =
 	    (float)
 	      ( ( (aT.x - cT.x) * (bS.y - cS.y) )
 	        -
-	        ( (bT.x - cT.x) * (aS.y - cS.y) ) ) 
+	        ( (bT.x - cT.x) * (aS.y - cS.y) ) )
 	    / delta;
-	
-	deltaY = 
+
+	deltaY =
 	    ( ( (uint64_t)aS.y
 	          * (bT.x * cT.y - cT.x * bT.y) )
 	      -
 	      ( (uint64_t)bS.y
 	          * (aT.x * cT.y - cT.x * aT.y) )
 	      +
-	      ( (uint64_t)cS.y 
-	          * (aT.x * bT.y - bT.x * aT.y) ) ) 
+	      ( (uint64_t)cS.y
+	          * (aT.x * bT.y - bT.x * aT.y) ) )
 	    / delta;
 }
